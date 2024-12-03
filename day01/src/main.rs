@@ -24,10 +24,12 @@ fn main() {
         .fold(0, |ans, (a, b)| ans + (a - b).abs());
 
     dbg!(ans1);
+    assert_eq!(1222801, ans1);
 
     let ans2 = first.iter().fold(0, |ans, a| {
         ans + a * second.iter().filter(|b| a == *b).count() as i32
     });
 
     dbg!(ans2);
+    assert_eq!(22545250, ans2);
 }

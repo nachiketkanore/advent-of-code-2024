@@ -4,16 +4,20 @@ use regex::Regex;
 fn main() -> Result<()> {
     let input = include_str!("3.in");
     let re_group = Regex::new(r"mul\((\d+),(\d+)\)")?; // regex groups
-    let ans1 = re_group
-        .captures_iter(input)
-        .map(|caps| {
-            (
-                caps[1].parse::<i32>().unwrap(),
-                caps[2].parse::<i32>().unwrap(),
-            )
-        })
-        .fold(0, |ans, (a, b)| ans + a * b);
+    let common_cmd = |inp| -> i32 {
+        re_group
+            .captures_iter(inp)
+            .map(|caps| {
+                (
+                    caps[1].parse::<i32>().unwrap(),
+                    caps[2].parse::<i32>().unwrap(),
+                )
+            })
+            .fold(0, |ans, (a, b)| ans + a * b)
+    };
+    let ans1 = common_cmd(input);
 
+    assert_eq!(156388521, ans1);
     dbg!(ans1);
 
     let re = Regex::new(r"mul\((\d+),(\d+)\)|do\(\)|don't\(\)")?;
@@ -32,21 +36,11 @@ fn main() -> Result<()> {
                 enabled = false;
                 0
             }
-            "mul" => {
-                re_group
-                    .captures_iter(m)
-                    .map(|caps| {
-                        (
-                            caps[1].parse::<i32>().unwrap(),
-                            caps[2].parse::<i32>().unwrap(),
-                        )
-                    })
-                    .fold(0, |ans, (a, b)| ans + a * b)
-                    * enabled as i32
-            }
+            "mul" => common_cmd(m) * enabled as i32,
             _ => panic!("invalid regex match"),
         })
         .fold(0, |ans, val| ans + val);
+    assert_eq!(75920122, ans2);
     dbg!(ans2);
 
     Ok(())

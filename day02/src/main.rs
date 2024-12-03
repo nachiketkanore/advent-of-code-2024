@@ -20,6 +20,7 @@ fn main() {
             check(&mut vals)
         })
         .count();
+    assert_eq!(334, ans1);
     dbg!(ans1);
 
     let ans2 = include_str!("2.in")
@@ -44,5 +45,6 @@ fn main() {
                 > 0
         })
         .count();
+    assert_eq!(400, ans2);
     dbg!(ans2);
 }
