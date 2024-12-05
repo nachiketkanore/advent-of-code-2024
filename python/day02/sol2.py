@@ -7,10 +7,9 @@ def safe(A):
     B = B[::-1]
     ok2 = A == B
 
-    mn = min(abs(A[i] - A[i - 1]) for i in range(1, len(A)))
-    mx = max(abs(A[i] - A[i - 1]) for i in range(1, len(A)))
+    ok3 = all(x>0 and x<4 for x in [abs(A[i-1]-A[i]) for i in range(1,len(A))])
 
-    return (ok1 or ok2) and (mn > 0 and mx < 4)
+    return (ok1 or ok2) and ok3
 
 ans = 0
 for line in lines:

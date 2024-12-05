@@ -9,11 +9,9 @@ for line in lines:
 
     B = B[::-1]
     ok2 = A == B
+    ok3 = all(x>0 and x<4 for x in [abs(A[i-1]-A[i]) for i in range(1,len(A))])
 
-    mn = min(abs(A[i] - A[i - 1]) for i in range(1, len(A)))
-    mx = max(abs(A[i] - A[i - 1]) for i in range(1, len(A)))
-
-    if (ok1 or ok2) and (mn > 0 and mx < 4): 
+    if (ok1 or ok2) and ok3:
         ans += 1
 
 print(ans)
