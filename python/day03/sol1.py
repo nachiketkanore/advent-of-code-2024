@@ -1,7 +1,7 @@
 import re
 input = open("in", "r").read()
 
-x = re.findall("mul\([0-9]+,[0-9]+\)", input)
+x = re.findall(r"mul\([0-9]+,[0-9]+\)", input)
 
 ans1 = 0
 for m in x:
