@@ -1,4 +1,4 @@
-mat = [line for line in open('nin', 'r').read().split('\n') if len(line) > 0];
+mat = [line for line in open('in', 'r').read().split('\n') if len(line) > 0];
 N,M  = len(mat), len(mat[0])
 
 def check(i, j, id, dx, dy):
