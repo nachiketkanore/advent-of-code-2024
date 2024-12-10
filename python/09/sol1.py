@@ -10,8 +10,7 @@ for i, ch in enumerate(A):
         idx += 1
 
 def check(A):
-    last_digit = -1
-    first_dot = -1
+    last_digit, first_dot = -1, -1
     for i, ch in enumerate(A):
         if ch == '.':
             if first_dot == -1: first_dot = i

@@ -1,22 +1,16 @@
 import sys
 sys.setrecursionlimit(10**6)
 mat = open('in').read().strip().split('\n')
-print(mat)
 N, M = len(mat), len(mat[0])
 
-vis = [[False for _ in range(500)] for _ in range(500)]
+vis = set()
 
-def inside(i, j):
-    return i >= 0 and i < N and j >= 0 and j < M
+def inside(i, j): return i >= 0 and i < N and j >= 0 and j < M
 
 def go(i, j, dir):
-    if not inside(i, j):
+    if not inside(i, j) or mat[i][j] == '#':
         return 
-    if mat[i][j] == '#':
-        return
-    # if vis[i][j]:
-    #     return 
-    vis[i][j] = True
+    vis.add((i, j))
 
     dx, dy = 0, 0
     if dir == 'u':
@@ -31,22 +25,17 @@ def go(i, j, dir):
     ni, nj = i + dx, j + dy
 
     if inside(ni, nj):
-        if mat[ni][nj] == '#':
+        if mat[ni][nj] == '#': # change direction
             if dir == 'u':
-                go(i, j + 1, 'r')
+                go(i, j, 'r')
             elif dir == 'd':
-                go(i, j - 1, 'l')
+                go(i, j, 'l')
             elif dir == 'l':
-                go(i - 1, j, 'u')
+                go(i, j, 'u')
             elif dir == 'r':
-                go(i + 1, j, 'd')
-        else:
+                go(i, j, 'd')
+        else: # move ahead
             go(ni, nj, dir)
-
-
-
-
-
 
 si, sj = 0, 0
 for i in range(N):
@@ -55,12 +44,7 @@ for i in range(N):
             si, sj = i, j
             break
 
-
 go(si, sj, 'u')
-
-ans = 0
-for i in range(N):
-    for j in range(M):
-        ans += vis[i][j]
+ans = len(vis)
 print(ans)
 

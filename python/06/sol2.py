@@ -2,7 +2,7 @@ import sys
 from tqdm import tqdm
 sys.setrecursionlimit(10**7)
 
-mat = open('ex').read().strip().split('\n')
+mat = open('in').read().strip().split('\n')
 mat = [[ch for ch in row] for row in mat]
 N, M = len(mat), len(mat[0])
 print(N, M)
@@ -49,11 +49,6 @@ def go(i, j, dir):
 
     return False
 
-
-
-
-
-
 si, sj = 0, 0
 for i in range(N):
     for j in range(M):
@@ -61,14 +56,10 @@ for i in range(N):
             si, sj = i, j
             break
 
-
-progress = 0
 ans = 0
 for i in tqdm(range(N)):
     for j in range(M):
-        progress += 1
         if mat[i][j] == '.':
-
             mat[i][j] = '#'
             check.clear()
 
@@ -77,8 +68,5 @@ for i in tqdm(range(N)):
 
             mat[i][j] = '.'
 
-        if progress % 1000 == 0:
-            print(progress)
-# go(si, sj, 'u')
 print(ans)
 
