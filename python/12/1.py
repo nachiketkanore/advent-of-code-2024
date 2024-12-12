@@ -1,6 +1,5 @@
 lines = open('in').read().strip().split('\n')
 mat = [[ch for ch in line] for line in lines]
-print(mat)
 N, M = len(mat), len(mat[0])
 dirs = [(0,1), (0,-1), (1,0), (-1,0)]
 
@@ -31,8 +30,6 @@ for i in range(N):
             go(i, j, mat[i][j])
             area = len(curr)
             peri = 0
-            # print(curr)
-            # print('..............')
             for x, y in curr:
                 adj = 0
                 for dx, dy in dirs:
@@ -40,7 +37,6 @@ for i in range(N):
                     if not inside(nx, ny) or (inside(nx, ny) and mat[nx][ny] != mat[x][y]):
                         adj += 1
                 peri += adj
-            print(area, peri)
             ans += area * peri
 
 print(ans)
