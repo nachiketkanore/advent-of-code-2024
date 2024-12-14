@@ -7,11 +7,8 @@ for line in lines:
     y, x, dy, dx = map(int, re.findall(r'-*\d+', line))
     positions.append((x, y, dx, dy))
 
-print(positions)
-
 ITER = 100
 N, M = 103, 101
-# N, M = 7, 11
 for _ in range(ITER):
     npositions = []
     for x, y, dx, dy in positions:
@@ -21,11 +18,7 @@ for _ in range(ITER):
 check = [[0 for _ in range(M)] for _ in range(N)]
 
 for x, y, dx, dy in positions:
-    # print(x, y)
     check[x][y] += 1
-
-# for i in range(N):
-#     print(''.join(str(check[i][j]) if check[i][j] != 0 else '.' for j in range(M)))
 
 midN, midM = N // 2, M // 2
 
@@ -41,6 +34,5 @@ for i in range(N):
         if i > midN and j > midM:
             four += check[i][j]
 
-print(one, two, three, four)
 ans = one * two * three * four
-print(ans)
+print(f'ans = {ans}')
