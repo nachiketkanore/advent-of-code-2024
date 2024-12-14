@@ -22,9 +22,7 @@ while True:
         npositions.append(((x + dx + N) % N, (y + dy + M) % M, dx, dy))
     time += 1
     positions = npositions
-    unique = set()
-    for x, y, _, _ in positions:
-        unique.add((x, y))
+    unique = set((x, y) for x, y, _, _ in positions)
     if len(unique) == len(positions):
         display(positions)
         print(f'ans = {time}')
